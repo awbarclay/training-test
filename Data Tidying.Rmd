@@ -44,7 +44,7 @@ catch_df<-catch_df%>%
 ```
 
 #Analysis
-```{r}
+```{r annual catch}
 Annual_catch<-catch_df %>% 
   filter(Species=="Chinook") %>% 
   group_by(Region,Year) %>% 
@@ -52,5 +52,23 @@ Annual_catch<-catch_df %>%
   arrange(desc(Mean_Catch))
 ```
 
+#Add region definitions
+```{r}
+region_defs <- read.csv(url("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/df35b.303.1", method = "libcurl"),
+                        stringsAsFactors = FALSE)
+```
+##Select columns from region definition DF
+```{r}
+region_defs<-region_defs %>% 
+  select(code,mgmtArea) %>% 
+  rename(Region=code, Region_Name=mgmtArea)
+```
+##Join catch data with region names
+```{r}
+
+catch_joined <- left_join(catch_df,region_defs,by = "Region")
+
+
+```
 
 
