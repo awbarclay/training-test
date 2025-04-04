@@ -1,6 +1,6 @@
 # training-test
 
-This is a test repository
+Can I push to this test repo?
 
 ## Second level header
 
